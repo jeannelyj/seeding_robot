@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="soil">
+    <static>true</static>
+    <link name="link">
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>model://soil/meshes/soil.STL</uri>
+            <scale>0.05 0.05 0.00122749999</scale>
+          </mesh>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>model://soil/meshes/soil.STL</uri>
+            <scale>0.05 0.05 0.00122749999</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://soil/materials/scripts</uri>
+            <uri>model://soil/materials/textures</uri>
+            <name>soil/Image</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
