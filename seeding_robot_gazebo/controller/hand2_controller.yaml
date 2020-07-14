@@ -1,0 +1,6 @@
+hand2_controller:
+  type: position_controllers/JointTrajectoryController
+  joints:
+     - Arm22move
+  state_publish_rate:  25
+  action_monitor_rate: 10
