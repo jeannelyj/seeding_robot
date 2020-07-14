@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="seeding_robot">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="arm1">
+        <joint name="Arm1" />
+        <joint name="Arm11" />
+    </group>
+    <group name="hand1">
+        <joint name="Arm12" />
+    </group>
+    <group name="arm2">
+        <joint name="Arm2" />
+        <joint name="Arm21" />
+    </group>
+    <group name="hand2">
+        <joint name="Arm22move" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="arm1extend" group="arm1">
+        <joint name="Arm1" value="-1.5708" />
+        <joint name="Arm11" value="-0.089" />
+    </group_state>
+    <group_state name="hand1extend" group="hand1">
+        <joint name="Arm12" value="-0.0876" />
+    </group_state>
+    <group_state name="hand1retract" group="hand1">
+        <joint name="Arm12" value="0" />
+    </group_state>
+    <group_state name="arm1retract" group="arm1">
+        <joint name="Arm1" value="0" />
+        <joint name="Arm11" value="-0.0438" />
+    </group_state>
+    <group_state name="hand2extend" group="hand2">
+        <joint name="Arm22move" value="0.0072" />
+    </group_state>
+    <group_state name="hand2retract" group="hand2">
+        <joint name="Arm22move" value="-0.0057" />
+    </group_state>
+    <group_state name="arm2putseedpos1" group="arm2">
+        <joint name="Arm2" value="1.5708" />
+        <joint name="Arm21" value="0.008" />
+    </group_state>
+    <group_state name="arm2putseedpos2" group="arm2">
+        <joint name="Arm2" value="1.5708" />
+        <joint name="Arm21" value="0.0891" />
+    </group_state>
+    <group_state name="arm2takeseed2" group="arm2">
+        <joint name="Arm2" value="0" />
+        <joint name="Arm21" value="0.0891" />
+    </group_state>
+    <group_state name="arm2takeseed1" group="arm2">
+        <joint name="Arm2" value="0" />
+        <joint name="Arm21" value="0.0008" />
+    </group_state>
+    <group_state name="arm11original" group="arm1">
+        <joint name="Arm1" value="0" />
+        <joint name="Arm11" value="0" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="hand1" parent_link="Arm11_Link" group="hand1" parent_group="arm1" />
+    <end_effector name="hand2" parent_link="Arm21_Link" group="hand2" parent_group="arm2" />
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="virtual_joint" type="fixed" parent_frame="world" child_link="world" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="Arm11_Link" link2="Arm12_Link" reason="Adjacent" />
+    <disable_collisions link1="Arm11_Link" link2="Arm1_Link" reason="Adjacent" />
+    <disable_collisions link1="Arm11_Link" link2="Arm21_Link" reason="Never" />
+    <disable_collisions link1="Arm11_Link" link2="Arm22fix_Link" reason="Never" />
+    <disable_collisions link1="Arm11_Link" link2="Arm22move_Link" reason="Never" />
+    <disable_collisions link1="Arm11_Link" link2="Arm2_Link" reason="Never" />
+    <disable_collisions link1="Arm11_Link" link2="Roller_Link" reason="Never" />
+    <disable_collisions link1="Arm11_Link" link2="Rollerstick_Link" reason="Never" />
+    <disable_collisions link1="Arm11_Link" link2="base_link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="Arm1_Link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="Arm21_Link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="Arm22fix_Link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="Arm22move_Link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="Arm2_Link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="Roller_Link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="Rollerstick_Link" reason="Never" />
+    <disable_collisions link1="Arm12_Link" link2="base_link" reason="Never" />
+    <disable_collisions link1="Arm1_Link" link2="Arm21_Link" reason="Never" />
+    <disable_collisions link1="Arm1_Link" link2="Arm22fix_Link" reason="Never" />
+    <disable_collisions link1="Arm1_Link" link2="Arm22move_Link" reason="Never" />
+    <disable_collisions link1="Arm1_Link" link2="Arm2_Link" reason="Never" />
+    <disable_collisions link1="Arm1_Link" link2="Roller_Link" reason="Never" />
+    <disable_collisions link1="Arm1_Link" link2="Rollerstick_Link" reason="Never" />
+    <disable_collisions link1="Arm1_Link" link2="base_link" reason="Adjacent" />
+    <disable_collisions link1="Arm21_Link" link2="Arm22fix_Link" reason="Adjacent" />
+    <disable_collisions link1="Arm21_Link" link2="Arm22move_Link" reason="Adjacent" />
+    <disable_collisions link1="Arm21_Link" link2="Arm2_Link" reason="Adjacent" />
+    <disable_collisions link1="Arm21_Link" link2="Roller_Link" reason="Never" />
+    <disable_collisions link1="Arm21_Link" link2="Rollerstick_Link" reason="Never" />
+    <disable_collisions link1="Arm22fix_Link" link2="Arm2_Link" reason="Never" />
+    <disable_collisions link1="Arm22fix_Link" link2="Roller_Link" reason="Never" />
+    <disable_collisions link1="Arm22fix_Link" link2="Rollerstick_Link" reason="Never" />
+    <disable_collisions link1="Arm22move_Link" link2="Arm2_Link" reason="Never" />
+    <disable_collisions link1="Arm22move_Link" link2="Roller_Link" reason="Never" />
+    <disable_collisions link1="Arm22move_Link" link2="Rollerstick_Link" reason="Never" />
+    <disable_collisions link1="Arm2_Link" link2="Roller_Link" reason="Never" />
+    <disable_collisions link1="Arm2_Link" link2="Rollerstick_Link" reason="Never" />
+    <disable_collisions link1="Arm2_Link" link2="base_link" reason="Adjacent" />
+    <disable_collisions link1="Roller_Link" link2="Rollerstick_Link" reason="Adjacent" />
+    <disable_collisions link1="Roller_Link" link2="base_link" reason="Never" />
+    <disable_collisions link1="Rollerstick_Link" link2="base_link" reason="Adjacent" />
+</robot>

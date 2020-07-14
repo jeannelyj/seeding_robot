@@ -1,0 +1,21 @@
+controller_list:
+  - name: arm1_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints: [Arm1, Arm11]
+  - name: hand1_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints: [Arm12]
+  - name: arm2_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints: [Arm2, Arm21]
+  - name: hand2_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: true
+    joints: [Arm22move]

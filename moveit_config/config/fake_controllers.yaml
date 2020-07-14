@@ -1,0 +1,15 @@
+controller_list:
+  - name: fake_arm1_controller
+    joints:
+      - Arm1
+      - Arm11
+  - name: fake_hand1_controller
+    joints:
+      - Arm12
+  - name: fake_arm2_controller
+    joints:
+      - Arm2
+      - Arm21
+  - name: fake_hand2_controller
+    joints:
+      - Arm22move
